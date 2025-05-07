@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation - Skin Care</title>
+    <link rel="stylesheet" href="order_confirmation.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Skin Care Logo">
+            <a href="guess.html">
+                <h1>SKIN CARE</h1>
+            </a>
+        </div>
+    </header>
+
+    <section class="order-confirmation-container">
+        <h2>Order Confirmation</h2>
+
+        <div id="order-details-container">
+            <!-- Order details will be injected here -->
+        </div>
+
+        <div class="buttons">
+            <button id="cancel-order">Cancel Order</button>
+            <button id="confirm-order">Confirm Order</button>
+        </div>
+    </section>
+
+    <script>
+        const orderData = JSON.parse(localStorage.getItem('orderData'));
+        const orderDetailsContainer = document.getElementById('order-details-container');
+
+        if (orderData) {
+            let itemsList = '<ol>';
+            orderData.items.forEach(item => {
+                itemsList += `<li>${item.name} - ${item.quantity} x ₱${item.price} = ₱${item.quantity * item.price}</li>`;
+            });
+            itemsList += '</ol>';
+
+            orderDetailsContainer.innerHTML = `
+                <h3>Order Details</h3>
+                <p><strong>Name:</strong> ${orderData.customer.name}</p>
+                <p><strong>Email:</strong> ${orderData.customer.email}</p>
+                <p><strong>Address:</strong> ${orderData.customer.address}, ${orderData.customer.city}, ${orderData.customer.postalCode}</p>
+                <p><strong>Total Amount:</strong> ₱${orderData.totalAmount}</p>
+                <h4>Ordered Items:</h4>
+                ${itemsList}
+            `;
+        } else {
+            orderDetailsContainer.innerHTML = '<p>No order found!</p>';
+        }
+
+        // Cancel order handler
+        document.getElementById('cancel-order').addEventListener('click', () => {
+            localStorage.removeItem('orderData');
+            window.location.href = 'guess.html';
+        });
+
+        // Confirm order handler
+        document.getElementById('confirm-order').addEventListener('click', () => {
+            if (orderData) {
+                const confirmedOrders = JSON.parse(localStorage.getItem('confirmedOrders')) || [];
+                
+                const confirmedOrder = {
+                    ...orderData,
+                    confirmedAt: new Date().toISOString()
+                };
+
+                confirmedOrders.push(confirmedOrder);
+                localStorage.setItem('confirmedOrders', JSON.stringify(confirmedOrders));
+                localStorage.removeItem('orderData');
+
+                window.location.href = 'ordered.html';
+            }
+        });
+    </script>
+</body>
+</html>

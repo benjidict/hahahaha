@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Care</title>
+    <link rel="stylesheet" href="styles.css"> 
+    <style>
+        .new-arrival-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to right, #fff0f5, #fce4ec);
+    padding: 60px 40px;
+    margin: 30px auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+    gap: 40px;
+    transition: transform 0.8s ease-in-out;
+}
+
+.banner-content {
+    max-width: 50%;
+    animation: fadeIn 1s ease-in;
+}
+
+.banner-content h2 {
+    color: #ff4081;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.banner-content h1 {
+    font-size: 40px;
+    color: #333;
+    margin: 10px 0;
+    line-height: 1.3;
+}
+
+.banner-content p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.banner-content button {
+    background: #ff4081;
+    color: white;
+    border: none;
+    padding: 12px 26px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(255, 64, 129, 0.3);
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.banner-content button:hover {
+    background: #e60073;
+    transform: translateY(-2px);
+}
+
+.banner-image {
+    display: none;
+    max-width: 45%;
+    animation: fadeIn 1.2s ease-in;
+}
+
+.banner-image.active {
+    display: block;
+}
+
+.banner-image img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.5s ease, opacity 1s ease;
+}
+
+.banner-image img:hover {
+    transform: scale(1.03);
+}
+
+/* Navigation arrows */
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 26px;
+    color: #fff;
+    cursor: pointer;
+    background: #ff4081;
+    padding: 10px 12px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease, transform 0.2s;
+    z-index: 10;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.nav-arrow:hover {
+    background-color: #e60073;
+    transform: translateY(-50%) scale(1.05);
+}
+
+.prev-arrow {
+    left: 20px;
+}
+
+.next-arrow {
+    right: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .new-arrival-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 20px;
+        gap: 30px;
+    }
+
+    .banner-content {
+        max-width: 100%;
+    }
+
+    .banner-content h1 {
+        font-size: 30px;
+    }
+
+    .banner-content p {
+        font-size: 16px;
+    }
+
+    .banner-image {
+        max-width: 100%;
+    }
+
+    .nav-arrow {
+        font-size: 22px;
+        padding: 8px 10px;
+    }
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Skin Care Logo">
+            <h1 id="logo" style="cursor: pointer;">SKIN CARE</h1>
+        </div>
+        <div class="menu-toggle">&#9776;</div>
+        <nav>
+            <ul>
+                <li><a href="#">HOME</a></li>
+                <li><a href="product.html">PRODUCTS</a></li> <!-- Replaced dropdown with a direct link -->
+                <li><a href="ha.html">SALE</a></li>
+                <li><a href="new_arrivals.html">NEW ARRIVALS</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+            </ul>
+        </nav>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search">
+            <button id="searchButton">SEARCH</button>
+        </div>
+        <div class="icons">
+            <a href="cart.html" id="cart-icon"><img src="cart-icon.png" alt="Cart"></a>
+            <a href="profile.html"><img src="user-icon.png" alt="User"></a>
+        </div>
+    </header>
+
+    <section id="searchResultsSection" class="main-content">
+        <div id="searchResultsContainer"></div>
+    </section>
+
+    <section id="guestPage" class="main-content">
+        <div class="text">
+            <h2>Be Your</h2>
+            <h2>Own Kind of</h2>
+            <h2>Beautiful</h2>
+            <button id="startButton" onclick="window.location.href='product.html'">SHOW PRODUCTS</button>
+        </div>
+        <div class="illustration">
+            <img src="illustration.png" alt="Diverse Women Illustration">
+        </div>
+    </section>
+
+    <!-- New Arrivals Section -->
+    <section class="new-arrival-banner" id="banner">
+        <div class="banner-content">
+            <h2>NEW ARRIVALS</h2>
+            <h1>Luxury Skin Care</h1>
+            <p>Discover the latest in skincare. Hydrate, nourish, and rejuvenate with our new range.</p>
+            <button onclick="window.location.href='new_arrivals.html'">SHOP NOW</button>
+        </div>
+        <div class="banner-image active">
+            <img src="product/sabon.jpg" onerror="this.onerror=null; this.src='img/placeholder.jpg';" alt="New Skin Care Product">
+        </div>
+        <div class="banner-image">
+            <img src="product/haha.jpg" onerror="this.onerror=null; this.src='img/placeholder.jpg';" alt="Premium Skin Care">
+        </div>
+        <div class="banner-image">
+            <img src="product/images.jpeg" onerror="this.onerror=null; this.src='img/placeholder.jpg';" alt="Organic Skin Care">
+        </div>
+
+        <div class="prev-arrow nav-arrow" onclick="moveSlide(-1)">&#10094;</div>
+        <div class="next-arrow nav-arrow" onclick="moveSlide(1)">&#10095;</div>
+    </section>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.banner-image');
+
+        function moveSlide(direction) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+    </script>
+
+    <script src="ehh.js"></script>
+</body>
+
+</html>

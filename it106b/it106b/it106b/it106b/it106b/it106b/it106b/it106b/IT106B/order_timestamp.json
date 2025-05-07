@@ -1,0 +1,16 @@
+{
+    "customer": {
+      "name": "John Doe",
+      "email": "johndoe@example.com",
+      "address": "123 Main St, Cityville",
+      "city": "Cityville",
+      "postalCode": "12345"
+    },
+    "items": [
+      { "name": "Face Cream", "quantity": 1, "price": 500 },
+      { "name": "Toner", "quantity": 2, "price": 300 },
+      { "name": "Moisturizer", "quantity": 1, "price": 400 }
+    ],
+    "totalAmount": 2000
+  }
+  

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cart - Skin Care</title>
+    <link rel="stylesheet" href="cart.css">
+    
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Skin Care Logo">
+            <h1>SKIN CARE</h1>
+        </div>
+        <div class="menu-toggle">&#9776;</div>
+        <nav>
+            <ul id="nav-links">
+                <li><a href="guess.html">HOME</a></li>
+                <li><a href="product.html">PRODUCTS</a></li>
+                <li><a href="ha.html">SALE</a></li>
+                <li><a href="new_arrivals.html">NEW ARRIVALS</a></li>
+                <li><a href="#" id="login-logout-link">LOG IN</a></li>
+            </ul>
+        </nav>
+        <div class="search-bar">
+            <input type="text" placeholder="Search">
+            <button>SEARCH</button>
+        </div>
+        <div class="icons">
+            <a href="cart.html">
+                <svg class="cart-icon" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M7 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM7.16 14h9.69c.75 0 1.41-.41 1.75-1.05l3.24-6.32c.18-.35.16-.77-.05-1.1s-.58-.54-.99-.54H6.21L5.27 2H1v2h3l3.6 7.59-1.35 2.45C6.06 14.17 6 14.33 6 14.5c0 .55.45 1 1 1h12v-2H7.16l1.1-2z"/>
+                </svg>
+                <span id="cart-item-count" class="cart-item-count">0</span>
+            </a>
+            <a href="#">
+                <img src="user-icon.png" alt="User Icon" class="user-icon">
+            </a>
+        </div>
+    </header>
+
+    <section class="cart-container">
+        <h2><svg class="cart-svg" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M7 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM7.16 14h9.69c.75 0 1.41-.41 1.75-1.05l3.24-6.32c.18-.35.16-.77-.05-1.1s-.58-.54-.99-.54H6.21L5.27 2H1v2h3l3.6 7.59-1.35 2.45C6.06 14.17 6 14.33 6 14.5c0 .55.45 1 1 1h12v-2H7.16l1.1-2z"/>
+        </svg> MY CART</h2>
+
+        <div id="cart-items-container">
+            <!-- Cart items will be injected via JavaScript -->
+        </div>
+
+        <div class="total-section">
+            <span class="total-label">TOTAL</span>
+            <span class="total-amount" id="total-amount">₱0.00</span>
+        </div>
+
+        <button id="clear-cart">Clear Cart</button>
+        <button id="back-button" onclick="window.history.back()">Back</button>
+
+        <!-- Order and Shipping Options -->
+        <div class="order-section">
+            <button id="proceed-to-order">Proceed to Order</button>
+            <button id="choose-shipping">Choose Shipping</button>
+            <!-- Added a button for ordered products -->
+            <a href="order_confirmation.html">
+                <button id="view-ordered-products">View Ordered Products</button>
+            </a>
+        </div>
+    </section>
+
+    <section class="feedback-section">
+        <h3>Leave Your Feedback (Optional)</h3>
+        <textarea id="feedback-text" class="feedback-textarea" placeholder="Write your feedback here..."></textarea>
+        <button id="submit-feedback" class="feedback-button">Submit Feedback</button>
+        <p id="feedback-message" class="feedback-message"></p>
+    </section>
+
+    <script>
+        // Check if the user is logged in (using localStorage)
+        const isLoggedIn = localStorage.getItem('loggedIn') === 'true';
+
+        // Select the login/logout link
+        const loginLogoutLink = document.getElementById('login-logout-link');
+
+        // Update the login/logout link based on login status
+        if (isLoggedIn) {
+            loginLogoutLink.textContent = 'LOG OUT';
+            loginLogoutLink.onclick = () => {
+                localStorage.setItem('loggedIn', 'false');  // Log out
+                window.location.href = 'index.html';  // Redirect to home
+            };
+        } else {
+            loginLogoutLink.textContent = 'LOG IN';
+            loginLogoutLink.onclick = () => {
+                window.location.href = 'login.html';  // Redirect to login page
+            };
+        }
+    </script>
+
+    <script src="cart.js"></script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8e7ec;
+    margin: 0;
+    padding: 0;
+}
+
+/* HEADER */
+header {
+    background-color: #C48191;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px;
+    margin-right: 10px;
+}
+
+h1 {
+    color: white;
+    font-size: 24px;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+/* LOGIN SECTION */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    position: relative;
+}
+
+.login-box {
+    background-color: #d3a6b1;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    width: 350px;
+    position: absolute;
+    transition: transform 0.5s ease;
+}
+
+/* Register Form initially hidden */
+#registerForm {
+    display: none;
+}
+
+#formTitle {
+    color: #5a2c3c;
+    font-size: 22px;
+}
+
+/* Sliding Animation */
+.login-box.slide-left {
+    transform: translateX(-100%);
+}
+
+.login-box.slide-right {
+    transform: translateX(100%);
+}
+
+/* Login and Register Form Inputs */
+.input-group {
+    background-color: #e4bfc5;
+    padding: 10px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.icon {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+input {
+    border: none;
+    background: none;
+    outline: none;
+    font-size: 16px;
+    width: 100%;
+}
+
+/* Buttons */
+.login-button {
+    background-color: #5a2c3c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+/* Text between forms */
+.or-text {
+    margin: 15px 0;
+    font-size: 14px;
+    color: #5a2c3c;
+    font-weight: bold;
+}
+
+.or-text span {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        background-color: #5a2c3c;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    nav ul.show {
+        display: flex;
+    }
+
+    .login-box {
+        width: 80%;
+    }
+}
+
+/* Login Avatar (User Icon) */
+.login-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.login-avatar:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+/* Profile Section */
+.profile-box {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Auth Box */
+.auth-box {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.auth-box h2 {
+    font-size: 1.5rem;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.auth-button {
+    background-color: #5a2c3c;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.auth-button:hover {
+    background-color: #8b3e54;
+}
+
+.toggle-text {
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+
+/* Additional Styles */
+.content-container {
+    padding: 20px;
+    text-align: center;
+}
+
+/* Custom Navigation */
+nav ul {
+    list-style-type: none;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+header .logo h1 {
+    font-size: 1.8rem;
+}

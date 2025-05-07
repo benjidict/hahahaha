@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Description - Skin Care</title>
+    <link rel="stylesheet" href="product.css">
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* General Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Header */
+header {
+    background: linear-gradient(to right, #c58b9b, #d7a4b4);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.logo img {
+    height: 50px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.logo h1 {
+    display: inline-block;
+    font-size: 2em;
+    margin: 0;
+    vertical-align: middle;
+}
+
+/* Product Description Container */
+.description-container {
+    padding: 40px;
+    max-width: 900px;
+    margin: 30px auto;
+    background-color: white;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2.2em;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+.description-container img {
+    max-width: 35%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.description-container img:hover {
+    transform: scale(1.05);
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.description-container p {
+    font-size: 1.1em;
+    line-height: 1.7;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+/* Rating Stars */
+.rating {
+    margin-top: 10px;
+    font-size: 1.6em;
+    color: #f39c12;
+}
+
+.rating .star {
+    margin-right: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.rating .star:hover {
+    transform: scale(1.2);
+}
+
+/* Back Button */
+.back-btn {
+    display: block;
+    margin: 30px auto;
+    padding: 12px 20px;
+    width: 200px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1em;
+    text-align: center;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.back-btn:hover {
+    background-color: #45a049;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Comment Section Styling */
+.comments-section {
+    margin-top: 40px;
+}
+
+.comment {
+    padding: 20px;
+    background-color: #fff;
+    border-left: 5px solid #4CAF50;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-align: left;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+}
+
+.comment.positive {
+    border-left-color: #28a745;
+}
+
+.comment.negative {
+    border-left-color: #dc3545;
+}
+
+.comment p {
+    margin: 0;
+}
+
+.comment .user {
+    font-weight: 600;
+    font-size: 1.1em;
+    color: #222;
+}
+
+.comment .message {
+    margin-top: 6px;
+    color: #555;
+}
+
+.comment .comment-rating {
+    margin-top: 5px;
+    font-size: 1.2em;
+    color: #f39c12;
+}
+
+.comment .profile-photo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.comment .comment-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+/* Comment Form Styling */
+.comment-form {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.comment-form textarea {
+    width: 80%;
+    padding: 12px;
+    font-size: 1em;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-bottom: 12px;
+    height: 100px;
+    resize: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+.comment-form button {
+    padding: 10px 25px;
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.comment-form button:hover {
+    background-color: #45a049;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.comment-form button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .description-container {
+        padding: 25px 15px;
+        margin: 20px 10px;
+    }
+
+    .description-container img {
+        max-width: 70%;
+    }
+
+    .back-btn {
+        width: 90%;
+        padding: 14px;
+    }
+
+    .comment-form textarea {
+        width: 95%;
+    }
+}
+
+/* Comment FadeIn Animation */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+</style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Skin Care Logo">
+            <a href="guess.html" id="logoLink">
+                <h1>SKIN CARE</h1>
+            </a>
+        </div>
+    </header>
+    <!-- Google Fonts and Font Awesome for icons -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const logoLink = document.getElementById("logoLink");
+    
+            // Check if the user is logged in (you can store the login status in localStorage/sessionStorage)
+            const isLoggedIn = localStorage.getItem("isLoggedIn"); // Example, replace with your actual login check logic
+    
+            // Redirect to the appropriate page based on login status
+            logoLink.addEventListener("click", function () {
+                if (isLoggedIn) {
+                    window.location.href = "guess.html"; // Redirect to guess.html if logged in
+                } else {
+                    window.location.href = "index.html"; // Redirect to index.html if not logged in
+                }
+            });
+        });
+    </script>
+    
+
+    <section class="description-container" id="descriptionContainer">
+        <!-- Product details will be injected here -->
+    </section>
+
+    <div class="comments-section">
+        <h3>User Comments</h3>
+        <div id="commentsList"></div>
+    </div>
+
+    <div class="comment-form">
+        <textarea id="userComment" placeholder="Write your comment here..."></textarea><br>
+        <button onclick="submitComment()" id="submitButton" disabled>Submit Comment</button>
+    </div>
+
+    <a href="javascript:void(0)" class="back-btn" onclick="goBack()">BACK</a>
+
+    <script>
+        const productDescriptions = {
+            Toner: {
+                description: "A gentle toner that helps balance the skin's pH, tightening pores and refreshing the skin.",
+                ingredients: "Water, Witch Hazel, Glycerin, Aloe Vera.",
+                benefits: "Tightens pores, Refreshes skin, Balances pH.",
+                price: "₱100.00",
+                image: "product/toner.png",
+                rating: 5
+            },
+            Moisturizer: {
+                description: "A hydrating moisturizer that deeply nourishes and softens the skin.",
+                ingredients: "Water, Hyaluronic Acid, Shea Butter, Vitamin E.",
+                benefits: "Hydrates skin, Softens texture, Improves elasticity.",
+                price: "₱150.00",
+                image: "product/moisturizer.png",
+                rating: 4
+            },
+            Serum: {
+                description: "A powerful serum that helps to brighten skin and reduce dark spots.",
+                ingredients: "Vitamin C, Hyaluronic Acid, Niacinamide.",
+                benefits: "Brightens skin, Reduces hyperpigmentation, Hydrates deeply.",
+                price: "₱200.00",
+                image: "product/serum.png",
+                rating: 4
+            },
+            FaceMask: {
+                description: "A rejuvenating face mask that deeply cleanses and hydrates, leaving your skin refreshed and glowing.",
+                ingredients: "Clay, Charcoal, Aloe Vera, Vitamin E.",
+                benefits: "Detoxifies, Hydrates, Removes impurities.",
+                price: "₱250.00",
+                image: "product/face.jpg",
+                rating: 4
+            },
+            Cleanser: {
+                description: "A gentle cleanser that removes makeup, dirt, and impurities while maintaining the skin's natural balance.",
+                ingredients: "Water, Glycerin, Green Tea Extract, Chamomile.",
+                benefits: "Cleanses without stripping, Soothes the skin, Removes makeup.",
+                price: "₱120.00",
+                image: "product/cleanser.png",
+                rating: 5
+            },
+            Sunscreen: {
+                description: "A lightweight sunscreen with broad-spectrum protection to shield your skin from harmful UV rays.",
+                ingredients: "Zinc Oxide, Aloe Vera, Vitamin C, Vitamin E.",
+                benefits: "Protects from UV damage, Hydrates, Prevents premature aging.",
+                price: "₱350.00",
+                image: "product/sunscreen.png",
+                rating: 5
+            },
+            EyeCream: {
+                description: "An eye cream that reduces puffiness, dark circles, and fine lines around the delicate eye area.",
+                ingredients: "Caffeine, Hyaluronic Acid, Peptides, Vitamin K.",
+                benefits: "Reduces puffiness, Brightens under-eye area, Smoothens fine lines.",
+                price: "₱200.00",
+                image: "product/eyecream.jpg",
+                rating: 4
+            },
+            LipBalm: {
+                description: "A nourishing lip balm that hydrates and protects lips from dryness and chapping.",
+                ingredients: "Beeswax, Shea Butter, Coconut Oil, Vitamin E.",
+                benefits: "Moisturizes, Protects, Soothes dry lips.",
+                price: "₱80.00",
+                image: "product/lipbalm.jpg",
+                rating: 5
+            },
+            FaceOil: {
+                description: "A luxurious face oil that deeply nourishes the skin, leaving it soft, smooth, and glowing.",
+                ingredients: "Rosehip Oil, Jojoba Oil, Vitamin E, Lavender.",
+                benefits: "Hydrates, Balances oil production, Softens skin.",
+                price: "₱450.00",
+                image: "product/faceoil.png",
+                rating: 4
+            },
+            NightCream: {
+                description: "A rich night cream that repairs and regenerates the skin while you sleep.",
+                ingredients: "Retinol, Hyaluronic Acid, Niacinamide, Shea Butter.",
+                benefits: "Repairs skin overnight, Reduces wrinkles, Hydrates deeply.",
+                price: "₱350.00",
+                image: "product/nightcream.png",
+                rating: 4
+            },
+            Exfoliator: {
+                description: "A gentle exfoliator that removes dead skin cells, revealing smoother, more radiant skin.",
+                ingredients: "Sugar, Almond Oil, Vitamin C, Aloe Vera.",
+                benefits: "Exfoliates, Softens skin, Enhances radiance.",
+                price: "₱180.00",
+                image: "product/exfoliator.png",
+                rating: 4
+            },
+            AntiAgingCream: {
+                description: "An anti-aging cream that reduces fine lines, wrinkles, and sagging for youthful-looking skin.",
+                ingredients: "Collagen, Retinol, Hyaluronic Acid, Vitamin E.",
+                benefits: "Reduces fine lines, Firms skin, Hydrates.",
+                price: "₱550.00",
+                image: "product/antiagingcream.png",
+                rating: 5
+            },
+            LipScrub: {
+                description: "A gentle lip scrub that exfoliates and smooths the lips, preparing them for hydration.",
+                ingredients: "Sugar, Honey, Vitamin E, Coconut Oil.",
+                benefits: "Exfoliates lips, Hydrates, Softens lips.",
+                price: "₱90.00",
+                image: "product/lipscrub.png",
+                rating: 4
+            },
+            BBCream: {
+                description: "A BB cream that provides light coverage, evens out skin tone, and hydrates all day long.",
+                ingredients: "Mineral Water, Glycerin, Niacinamide, SPF 30.",
+                benefits: "Evens skin tone, Hydrates, Protects from UV rays.",
+                price: "₱250.00",
+                image: "product/bbcream.png",
+                rating: 4
+            },
+            FaceMist: {
+                description: "A refreshing face mist that hydrates, refreshes, and sets makeup for a glowing complexion.",
+                ingredients: "Rose Water, Aloe Vera, Cucumber Extract.",
+                benefits: "Hydrates, Refreshes, Sets makeup.",
+                price: "₱150.00",
+                image: "product/facemist.png",
+                rating: 4
+            },
+        };
+
+        const productComments = {
+            Toner: [
+                {
+                    user: "Jane Doe",
+                    message: "Great toner! Really balances my skin.",
+                    rating: 5,
+                    type: "positive",
+                    profilePhoto: "profile/images.jpg"
+                },
+                {
+                    user: "Arly69",
+                    message: "Not the best toner I've used.",
+                    rating: 2,
+                    type: "negative",
+                    profilePhoto: "profile/sins.jpg"
+                },
+                {
+                    user: "Julaina 1234567890",
+                    message: "Bataka Mag Coding Ouy.",
+                    rating: 5,
+                    type: "positive",
+                    profilePhoto: "profile/2.jpg"
+                }
+            ],
+            Serum: [
+                {
+                    user: "Mark Lee",
+                    message: "Brightened my skin, but felt a bit heavy.",
+                    rating: 4,
+                    type: "positive",
+                    profilePhoto: "profile/1.jpg"
+                },
+                {
+                    user: "Anna",
+                    message: "Didn't notice any change.",
+                    rating: 2,
+                    type: "negative",
+                    profilePhoto: "profile/0.jpg"
+                },
+                {
+                    user: "Julaina 1234567890",
+                    message: "Bai Paturo Naman Ohh.",
+                    rating: 5,
+                    type: "positive",
+                    profilePhoto: "profile/2.jpg"
+                }
+            ],
+            FaceMask: [
+                {
+                    user: "Mark Lee",
+                    message: "Brightened my skin, but felt a bit heavy.",
+                    rating: 4,
+                    type: "positive",
+                    profilePhoto: "profile/1.jpg"
+                },
+                {
+                    user: "Anna",
+                    message: "love you po uwu.",
+                    rating: 2,
+                    type: "negative",
+                    profilePhoto: "profile/0.jpg"
+                },
+                {
+                    user: "Julaina 1234567890",
+                    message: "hahahahahah.",
+                    rating: 5,
+                    type: "positive",
+                    profilePhoto: "profile/2.jpg"
+                }
+            ],
+            Cleanser: [
+                {
+                    user: "YAwa",
+                    message: "Brightened my skin, but felt a bit heavy.",
+                    rating: 4,
+                    type: "positive",
+                    profilePhoto: "profile/1.jpg"
+                },
+                {
+                    user: "sdsdfsf",
+                    message: "ampangit mo.",
+                    rating: 2,
+                    type: "negative",
+                    profilePhoto: "profile/1.jpg"
+                },
+                {
+                    user: "Julaina 1234567890",
+                    message: "Bataka Ouy.",
+                    rating: 5,
+                    type: "positive",
+                    profilePhoto: "profile/2.jpg"
+                }
+            ],
+            Sunscreen: [
+                {
+                    user: "Diwata999",
+                    message: "ok lang siya mao ra",
+                    rating: 4,
+                    type: "positive",
+                    profilePhoto: "profile/1.jpg"
+                },
+                {
+                    user: "fishtea010",
+                    message: "mema mo puta.",
+                    rating: 2,
+                    type: "negative",
+                    profilePhoto: "profile/1.jpg"
+                },
+                {
+                    user: "Julaina 1234567890",
+                    message: "Bataka Ouy.",
+                    rating: 5,
+                    type: "positive",
+                    profilePhoto: "profile/2.jpg"
+                }
+            ], 
+            EyeCream: [
+                {
+                    user: "aysus123",
+                    message: "1 1/2cup all purpose  flour 3/4cup powdered milk 1 tablespoon  baking powder 1/3cup sugar 1tablespoon melted butter or margarine 1/4cup evaporated milk 1piece egg 1/2cup sesame seeds Oil for deep frying 1.In a large bowl, add the all purpose flour, powdered milk and baking powder. Combine and mix well.2.In another bowl combine the sugar, evaporated milk, melted butter and egg. Mix until well combined. 3.Add the wet mixture to the dry mixture. Mix until well combined. Knead for a few minutes until smooth and sticky. 4.Grab a small portion of the mixture and then roll into a ball. Then, coat them with sesame seeds. 5.When fully covered by sesame seeds, roll them again in your palm to make sure that the seeds will not fall. Do these steps with the rest of the ingredients. Heat a lot of oil in a pan. Deep fry the binangkal balls until golden brown. Transfer them to a strainer or paper towel to drain excess oil. Transfer the binangkal to a serving plate.",
+                    rating: 4,
+                    type: "positive",
+                    profilePhoto: "profile/1.jpg"
+                },
+                {
+                    user: "fishtea010",
+                    message: "mema mo puta.",
+                    rating: 2,
+                    type: "negative",
+                    profilePhoto: "profile/1.jpg"
+                }
+            ], 
+            LipBalm: [
+                {
+                    user: "Diwata999",
+                    message: "palit namo's sa pares restaurant nako",
+                    rating: 4,
+                    type: "positive",
+                    profilePhoto: "profile/1.jpg"
+                },
+                {
+                    user: "fishtea010",
+                    message: "mema mo puta.",
+                    rating: 2,
+                    type: "negative",
+                    profilePhoto: "profile/0.jpg"
+                }
+            ], 
+            FaceOil: [
+        {
+            user: "John Doe",
+            message: "This face oil is perfect for my skin. It feels so nourished!",
+            rating: 5,
+            type: "positive",
+            profilePhoto: "profile/1.jpg"
+        },
+        {
+            user: "Sarah Lee",
+            message: "A bit greasy for my liking, but it does make my skin glow.",
+            rating: 4,
+            type: "positive",
+            profilePhoto: "profile/1.jpg"
+        },
+        {
+            user: "George",
+            message: "Didn't work well for my oily skin.",
+            rating: 2,
+            type: "negative",
+            profilePhoto: "profile/1.jpg"
+        }
+    ],
+    NightCream: [
+        {
+            user: "Amanda Smith",
+            message: "I love how my skin looks in the morning after using this!",
+            rating: 5,
+            type: "positive",
+            profilePhoto: "profile/1.jpg"
+        },
+        {
+            user: "Jessica",
+            message: "It’s a bit heavy for my skin, but it hydrates well.",
+            rating: 4,
+            type: "positive",
+            profilePhoto: "profile/0.jpg"
+        },
+        {
+            user: "Chris",
+            message: "Not sure about the results yet, but I’ll give it more time.",
+            rating: 3,
+            type: "neutral",
+            profilePhoto: "profile/0.jpg"
+        }
+    ],
+    Exfoliator: [
+        {
+            user: "Lily P.",
+            message: "It exfoliates gently and leaves my skin feeling soft.",
+            rating: 5,
+            type: "positive",
+            profilePhoto: "profile/1.jpg"
+        },
+        {
+            user: "Mike",
+            message: "A bit too harsh for my sensitive skin.",
+            rating: 2,
+            type: "negative",
+            profilePhoto: "profile/0.jpg"
+        },
+        {
+            user: "Eva",
+            message: "I can see a noticeable difference after using it for a week.",
+            rating: 4,
+            type: "positive",
+            profilePhoto: "profile/1.jpg"
+        }
+    ],
+    AntiAgingCream: [
+        {
+            user: "Olivia",
+            message: "Really helped smooth out fine lines around my eyes.",
+            rating: 5,
+            type: "positive",
+            profilePhoto: "profile/0.jpg"
+        },
+        {
+            user: "Jason",
+            message: "Not seeing much of a difference yet.",
+            rating: 3,
+            type: "neutral",
+            profilePhoto: "profile/1.jpg"
+        },
+        {
+            user: "Katherine",
+            message: "I love the texture of this cream, it's very hydrating.",
+            rating: 4,
+            type: "positive",
+            profilePhoto: "profile/0.jpg"
+        }
+    ],
+    LipScrub: [
+        {
+            user: "Rachel",
+            message: "This lip scrub is amazing! My lips are super soft now.",
+            rating: 5,
+            type: "positive",
+            profilePhoto: "profile/0.jpg"
+        },
+        {
+            user: "Nina",
+            message: "It works, but it's a little too gritty for my taste.",
+            rating: 3,
+            type: "neutral",
+            profilePhoto: "profile/0.jpg"
+        },
+        {
+            user: "Linda",
+            message: "Great product, but I wish it came in a bigger jar.",
+            rating: 4,
+            type: "positive",
+            profilePhoto: "profile/0.jpg"
+        }
+    ],
+    BBCream: [
+        {
+            user: "Aiden",
+            message: "Light coverage but really evens out my skin tone.",
+            rating: 4,
+            type: "positive",
+            profilePhoto: "profile/1.jpg"
+        },
+        {
+            user: "Bella",
+            message: "It was too light for my skin, didn't match well.",
+            rating: 2,
+            type: "negative",
+            profilePhoto: "profile/0.jpg"
+        },
+        {
+            user: "Emma",
+            message: "Perfect for daily wear, not too heavy and looks natural.",
+            rating: 5,
+            type: "positive",
+            profilePhoto: "profile/1.jpg"
+        }
+    ],
+    FaceMist: [
+        {
+            user: "Sophia",
+            message: "I love how refreshing this face mist is, perfect for hot days.",
+            rating: 5,
+            type: "positive",
+            profilePhoto: "profile/1.jpg"
+        },
+        {
+            user: "Grace",
+            message: "Feels nice but the scent is a bit strong for me.",
+            rating: 3,
+            type: "neutral",
+            profilePhoto: "profile/0.jpg"
+        },
+        {
+            user: "Olivia",
+            message: "This keeps my makeup in place all day, absolutely love it!",
+            rating: 5,
+            type: "positive",
+            profilePhoto: "profile/1.jpg"
+        }
+    ]
+        };
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const productName = urlParams.get("product");
+        const descriptionContainer = document.getElementById("descriptionContainer");
+        const commentsList = document.getElementById("commentsList");
+        const submitButton = document.getElementById("submitButton");
+
+        if (productDescriptions[productName]) {
+            const product = productDescriptions[productName];
+            descriptionContainer.innerHTML = `
+                <h2>${productName}</h2>
+                <img src="${product.image}" alt="${productName}">
+                <p><strong>Description:</strong> ${product.description}</p>
+                <p><strong>Ingredients:</strong> ${product.ingredients}</p>
+                <p><strong>Benefits:</strong> ${product.benefits}</p>
+                <p><strong>Price:</strong> ${product.price}</p>
+                <div class="rating" onclick="rateProduct(${product.rating})">${generateStars(product.rating)}</div>
+            `;
+        }
+
+        function generateStars(rating) {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= rating) {
+                    stars += '<span class="star">★</span>';
+                } else {
+                    stars += '<span class="star">☆</span>';
+                }
+            }
+            return stars;
+        }
+
+        function submitComment() {
+            const commentText = document.getElementById("userComment").value;
+            if (!commentText) return;
+
+            const rating = prompt("Rate this comment (1-5):", 5);
+            const newComment = {
+                user: "Anonymous",
+                message: commentText,
+                rating: parseInt(rating),
+                type: rating >= 4 ? "positive" : "negative",
+                profilePhoto: "profile/1.jpg"
+            };
+
+            productComments[productName].push(newComment);
+            displayComments();
+            document.getElementById("userComment").value = "";
+            submitButton.disabled = true;
+        }
+
+        function displayComments() {
+            commentsList.innerHTML = '';
+            const comments = productComments[productName] || [];
+            comments.forEach(comment => {
+                const commentElement = document.createElement("div");
+                commentElement.classList.add("comment", comment.type);
+                commentElement.innerHTML = `
+                    <div class="comment-info">
+                        <img src="${comment.profilePhoto}" alt="${comment.user}'s profile" class="profile-photo">
+                        <div>
+                            <p class="user">${comment.user}</p>
+                            <p class="message">${comment.message}</p>
+                            <div class="comment-rating">${generateStars(comment.rating)}</div>
+                        </div>
+                    </div>
+                `;
+                commentsList.appendChild(commentElement);
+            });
+        }
+
+        function rateProduct(rating) {
+            alert("You rated this product " + rating + " stars!");
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        document.getElementById("userComment").addEventListener("input", () => {
+            submitButton.disabled = !document.getElementById("userComment").value.trim();
+        });
+
+        // Initialize comments
+        displayComments();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,184 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #F8EDED;
+}
+
+/* Header */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #C48191;
+    padding: 10px 20px;
+    flex-wrap: wrap;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.logo h1 {
+    font-size: 24px;
+    color: white;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+}
+
+/* Navigation */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+}
+
+nav ul li {
+    position: relative;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    display: block;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #A25B6D;
+    width: 200px;
+    top: 100%;
+    left: 0;
+    list-style: none;
+    padding: 0;
+}
+
+.dropdown-menu li a {
+    color: white;
+    padding: 10px;
+    display: block;
+    text-align: left;
+}
+
+/* Show dropdown on mobile */
+.show-dropdown {
+    display: block !important;
+}
+
+/* Search Bar */
+.search-bar {
+    display: flex;
+    background: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    padding: 5px;
+}
+
+.search-bar button {
+    background-color: #EAA4A4;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.icons img {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+}
+
+/* Main Content */
+.main-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 50px;
+    flex-wrap: wrap;
+}
+
+.text {
+    text-align: center;
+}
+
+.text h2 {
+    font-size: 36px;
+    color: #5C1E2C;
+    margin: 10px 0;
+}
+
+.text button {
+    background-color: #EAA4A4;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.illustration img {
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+    }
+
+    nav ul.show {
+        display: flex;
+    }
+
+    .dropdown-menu {
+        position: static;
+        width: 100%;
+    }
+
+    .dropdown-menu li a {
+        text-align: center;
+    }
+
+    .main-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .illustration img {
+        max-width: 300px;
+    }
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Skin Care</title>
+    <link rel="stylesheet" href="checkout.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Skin Care Logo">
+            <a href="guess.html">
+                <h1>SKIN CARE</h1>
+            </a>
+        </div>
+        <nav>
+            <ul id="nav-links">
+                <li><a href="guess.html">HOME</a></li>
+                <li><a href="product.html">PRODUCTS</a></li>
+                <li><a href="ha.html">SALE</a></li>
+                <li><a href="new_arrivals.html">NEW ARRIVALS</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="checkout-container">
+        <h2>Checkout</h2>
+
+        <div id="checkout-items-container">
+            <!-- Cart items will be injected via JavaScript -->
+        </div>
+
+        <div class="total-section">
+            <span class="total-label">TOTAL</span>
+            <span class="total-amount" id="total-amount">₱0.00</span>
+        </div>
+
+        <form id="shipping-form">
+            <h3>Shipping Information</h3>
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <input type="text" id="address" placeholder="Shipping Address" required>
+            <input type="text" id="city" placeholder="City" required>
+            <input type="text" id="postal-code" placeholder="Postal Code" required>
+
+            <button type="submit" id="place-order">Place Order</button>
+        </form>
+
+        <button id="back-button" onclick="window.history.back()">Back</button>
+    </section>
+
+    <script>
+        // Example cart items (this would typically be in localStorage or sessionStorage)
+        const cartItems = [
+            { name: 'Face Cream', quantity: 1, price: 500 },
+            { name: 'Toner', quantity: 2, price: 300 },
+            { name: 'Moisturizer', quantity: 1, price: 400 }
+        ];
+        const totalAmount = 500 + 2 * 300 + 400; // Total price calculation
+
+        // Display total amount
+        const totalAmountElement = document.getElementById('total-amount');
+        totalAmountElement.textContent = `₱${totalAmount}`;
+
+        // Create ordered list for cart items
+        const checkoutItemsContainer = document.getElementById('checkout-items-container');
+        const ol = document.createElement('ol');  // Create an ordered list element
+
+        cartItems.forEach(item => {
+            const li = document.createElement('li'); // Create a list item for each cart item
+            li.textContent = `${item.name} - ${item.quantity} x ₱${item.price} = ₱${item.quantity * item.price}`;  // Display item name, quantity, price, and total for that item
+            ol.appendChild(li);  // Append the list item to the ordered list
+        });
+
+        checkoutItemsContainer.appendChild(ol);  // Append the ordered list to the container
+
+        // Handle form submission for placing the order
+        const shippingForm = document.getElementById('shipping-form');
+        shippingForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const orderData = {
+                customer: {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    address: document.getElementById('address').value,
+                    city: document.getElementById('city').value,
+                    postalCode: document.getElementById('postal-code').value
+                },
+                items: cartItems,
+                totalAmount: totalAmount
+            };
+
+            // Save the order data to localStorage
+            localStorage.setItem('orderData', JSON.stringify(orderData));
+
+            // Redirect to the order confirmation page
+            window.location.href = 'order_confirmation.html';
+        });
+    </script>
+</body>
+</html>

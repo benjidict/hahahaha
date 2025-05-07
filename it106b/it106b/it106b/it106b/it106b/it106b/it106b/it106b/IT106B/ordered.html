@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmed Orders - Skin Care</title>
+    <link rel="stylesheet" href="ordered.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Skin Care Logo">
+            <a href="guess.html">
+                <h1>SKIN CARE</h1>
+            </a>
+        </div>
+    </header>
+
+    <section class="confirmed-orders-container">
+        <h2>Your Confirmed Orders</h2>
+        <div id="confirmed-orders-list">
+            <!-- Confirmed orders will show here -->
+        </div>
+    </section>
+
+    <script>
+        const confirmedOrders = JSON.parse(localStorage.getItem('confirmedOrders')) || [];
+
+        const container = document.getElementById('confirmed-orders-list');
+
+        if (confirmedOrders.length === 0) {
+            container.innerHTML = '<p>You have no confirmed orders.</p>';
+        } else {
+            confirmedOrders.forEach(order => {
+                const deliveryDays = Math.floor(Math.random() * 3) + 2; // Random 2 to 4 days
+                const deliveryDate = new Date(order.confirmedAt);
+                deliveryDate.setDate(deliveryDate.getDate() + deliveryDays);
+
+                let itemsList = '<ul>';
+                order.items.forEach(item => {
+                    itemsList += `<li>${item.name} (${item.quantity} pcs)</li>`;
+                });
+                itemsList += '</ul>';
+
+                const orderDiv = document.createElement('div');
+                orderDiv.classList.add('order');
+
+                orderDiv.innerHTML = `
+                    <h3>${order.customer.name}</h3>
+                    <p><strong>Email:</strong> ${order.customer.email}</p>
+                    <p><strong>Address:</strong> ${order.customer.address}, ${order.customer.city}, ${order.customer.postalCode}</p>
+                    <p><strong>Total:</strong> ₱${order.totalAmount}</p>
+                    <p><strong>Estimated Delivery:</strong> ${deliveryDate.toDateString()} (${deliveryDays} days)</p>
+                    <h4>Items:</h4>
+                    ${itemsList}
+                    <hr>
+                `;
+
+                container.appendChild(orderDiv);
+            });
+        }
+    </script>
+</body>
+</html>

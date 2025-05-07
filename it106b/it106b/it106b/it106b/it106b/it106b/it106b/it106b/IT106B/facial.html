@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Skin Care</title>
+    <link rel="stylesheet" href="product.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Skin Care Logo">
+            <h1>SKIN CARE</h1>
+        </div>
+        <div class="menu-toggle">&#9776;</div>
+        <nav>
+            <ul>
+                <li><a href="home.html">HOME</a></li>
+                <li><a href="#">PRODUCTS</a></li>
+                <li><a href="#">SALE</a></li>
+                <li><a href="#">NEW ARRIVALS</a></li>
+                <li><a href="logout.html">LOG OUT</a></li>
+            </ul>
+        </nav>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search" oninput="filterProducts()">
+            <button>SEARCH</button>
+        </div>
+        <div class="icons">
+            <a href="cart.html"><img src="cart-icon.png" alt="Cart"></a>
+            <a href="profile.html"><img src="user-icon.png" alt="User"></a>
+        </div>
+    </header>
+
+    <section class="product-list" id="productList">
+        <div class="product-card" data-name="Facial Cleanser">
+            <img src="product/facial.png" alt="Facial Cleanser">
+            <h3>Facial Cleanser</h3>
+            <p>₱120</p>
+            <button class="add-to-cart">ADD TO CART</button>
+        </div>
+        <div class="product-card" data-name="Toner">
+            <img src="product/toner.png" alt="Toner">
+            <h3>Toner</h3>
+            <p>₱100</p>
+            <button class="add-to-cart">ADD TO CART</button>
+        </div>
+        <div class="product-card" data-name="Moisturizer">
+            <img src="product/moisturizer.png" alt="Moisturizer">
+            <h3>Moisturizer</h3>
+            <p>₱150</p>
+            <button class="add-to-cart">ADD TO CART</button>
+        </div>
+        <div class="product-card" data-name="Serum">
+            <img src="product/serum.png" alt="Serum">
+            <h3>Serum</h3>
+            <p>₱200</p>
+            <button class="add-to-cart">ADD TO CART</button>
+        </div>
+        <div class="product-card" data-name="Sunscreen">
+            <img src="product/sunscreen.png" alt="Sunscreen">
+            <h3>Sunscreen</h3>
+            <p>₱180</p>
+            <button class="add-to-cart">ADD TO CART</button>
+        </div>
+    </section>
+
+    <button class="back-btn" onclick="goBack()">BACK</button>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuToggle = document.querySelector(".menu-toggle");
+            const nav = document.querySelector("nav ul");
+            const addToCartButtons = document.querySelectorAll(".add-to-cart");
+
+            // Toggle Mobile Menu
+            menuToggle.addEventListener("click", () => {
+                nav.classList.toggle("show");
+            });
+
+            // Add to Cart Functionality
+            addToCartButtons.forEach(button => {
+                button.addEventListener("click", function () {
+                    const productCard = this.closest(".product-card");
+                    const productName = productCard.querySelector("h3").textContent;
+                    const productPrice = parseInt(productCard.querySelector("p").textContent.replace("₱", ""));
+                    const productImage = productCard.querySelector("img").src;
+
+                    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+                    // Check if the item already exists in the cart
+                    const existingItem = cart.find(item => item.name === productName);
+                    if (existingItem) {
+                        existingItem.quantity += 1;
+                    } else {
+                        cart.push({ name: productName, price: productPrice, image: productImage, quantity: 1 });
+                    }
+
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    alert("Item added to cart!");
+                });
+            });
+        });
+
+        // Filter Products based on Search Input
+        function filterProducts() {
+            const searchInput = document.getElementById("searchInput").value.toLowerCase();
+            const productList = document.getElementById("productList");
+            const productCards = productList.querySelectorAll(".product-card");
+
+            productCards.forEach(card => {
+                const productName = card.getAttribute("data-name").toLowerCase();
+                if (productName.includes(searchInput)) {
+                    card.style.display = "block";  // Show the product card
+                } else {
+                    card.style.display = "none";  // Hide the product card
+                }
+            });
+        }
+
+        // Enhanced Back Button Function
+        function goBack() {
+            if (document.referrer === "" || window.history.length < 2) {
+                window.location.href = "guess.html"; // Redirect to home if no history
+            } else {
+                window.history.back(); // Go back if possible
+            }
+        }
+    </script>
+</body>
+</html>

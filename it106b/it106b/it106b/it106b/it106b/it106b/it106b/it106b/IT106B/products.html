@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products - Skin Care</title>
+    <link rel="stylesheet" href="product.css" />
+    <style>
+        .loader {
+            display: none;
+            margin: 20px auto;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #c58b9b;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Skin Care Logo" />
+            <h1>SKIN CARE</h1>
+        </div>
+        <div class="menu-toggle">&#9776;</div>
+        <nav>
+            <ul>
+                <li><a href="#" id="homeLink">HOME</a></li>
+                <li><a href="product.html">PRODUCTS</a></li>
+                <li><a href="sale.html">SALE</a></li>
+                <li><a href="new_arrivals.html">NEW ARRIVALS</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+            </ul>
+        </nav>
+        <div class="search-bar">
+            <input type="text" placeholder="Search" id="searchInput" />
+            <button id="searchButton">SEARCH</button>
+        </div>
+        <div class="icons">
+            <a href="cart.html"><img src="cart-icon.png" alt="Cart" /></a>
+            <a href="profile.html"><img src="user-icon.png" alt="User" /></a>
+        </div>
+    </header>
+
+    <div class="loader" id="loader"></div>
+
+    <section class="product-list" id="productList">
+        <!-- Product Cards will be dynamically inserted here -->
+    </section>
+
+    <button class="back-btn" onclick="goBack()">BACK</button>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuToggle = document.querySelector(".menu-toggle");
+            const nav = document.querySelector("nav ul");
+            const loader = document.getElementById("loader");
+            const productList = document.getElementById("productList");
+
+            // Redirect Home Link Based on Login
+            document.getElementById("homeLink").addEventListener("click", function (e) {
+                e.preventDefault();
+                if (localStorage.getItem("isLoggedIn")) {
+                    window.location.href = "guess.html";
+                } else {
+                    window.location.href = "index.html";
+                }
+            });
+
+            const products = [
+                { name: 'Toner', price: 100, image: 'product/toner.png' },
+                { name: 'Moisturizer', price: 150, image: 'product/moisturizer.png' },
+                { name: 'Serum', price: 200, image: 'product/serum.png' },
+                { name: 'FaceMask', price: 250, image: 'product/face.jpg' },
+                { name: 'Cleanser', price: 120, image: 'product/cleanser.png' },
+                { name: 'Sunscreen', price: 180, image: 'product/sunscreen.png' },
+                { name: 'EyeCream', price: 220, image: 'product/eyecream.jpg' },
+                { name: 'LipBalm', price: 90, image: 'product/lipbalm.jpg' },
+                { name: 'FaceOil', price: 250, image: 'product/faceoil.png' },
+                { name: 'NightCream', price: 300, image: 'product/nightcream.png' },
+                { name: 'Exfoliator', price: 140, image: 'product/exfoliator.png' },
+                { name: 'Anti-Aging Cream', price: 350, image: 'product/antiaging.png' },
+                { name: 'LipScrub', price: 110, image: 'product/lipscrub.png' },
+                { name: 'BBCream', price: 180, image: 'product/bbcream.png' },
+                { name: 'FaceMist', price: 160, image: 'product/facemist.png' }
+            ];
+
+            function displayProducts(filteredProducts) {
+                productList.innerHTML = '';
+                setTimeout(() => {
+                    loader.style.display = "none"; // Hide loader when search results are ready
+                    filteredProducts.forEach(product => {
+                        const productCard = document.createElement("div");
+                        productCard.classList.add("product-card");
+
+                        const isLoggedIn = localStorage.getItem("isLoggedIn");
+                        const buttonHTML = isLoggedIn
+                            ? `<button class="add-to-cart">ADD TO CART</button>`
+                            : `<button class="add-to-cart disabled" disabled>LOGIN TO ADD</button>`;
+
+                        productCard.innerHTML = `
+                            <div class="product-image">
+                                <img src="${product.image}" alt="${product.name}">
+                            </div>
+                            <h3>${product.name}</h3>
+                            <p>₱${product.price}</p>
+                            ${buttonHTML}
+                            <a href="description_guest.html?product=${product.name}" class="description-btn">Description</a>
+                        `;
+
+                        // Add event listener for "Add to Cart"
+                        if (isLoggedIn) {
+                            productCard.querySelector(".add-to-cart").addEventListener("click", function () {
+                                let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                                const existingItem = cart.find(item => item.name === product.name);
+                                if (existingItem) {
+                                    existingItem.quantity += 1;
+                                } else {
+                                    cart.push({ name: product.name, price: product.price, image: product.image, quantity: 1 });
+                                }
+                                localStorage.setItem("cart", JSON.stringify(cart));
+                                alert(`${product.name} added to cart!`);
+                            });
+                        }
+
+                        productList.appendChild(productCard);
+                    });
+                }, 1000);
+            }
+
+            // Search Functionality with Loading Animation
+            document.getElementById("searchButton").addEventListener("click", function () {
+                const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+                const filteredProducts = products.filter(product =>
+                    product.name.toLowerCase().includes(searchTerm)
+                );
+
+                // Show loader
+                loader.style.display = "block";
+                productList.innerHTML = ''; // Clear product list before displaying results
+                // Display filtered products after loading animation
+                displayProducts(filteredProducts);
+            });
+
+            // Load all products initially
+            displayProducts(products);
+
+            // Toggle Mobile Menu
+            menuToggle.addEventListener("click", () => {
+                nav.classList.toggle("show");
+            });
+        });
+
+        function goBack() {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                window.location.href = "guess.html";
+            }
+        }
+    </script>
+</body>
+
+</html>
